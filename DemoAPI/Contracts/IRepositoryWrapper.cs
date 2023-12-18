@@ -1,10 +1,9 @@
-﻿namespace DemoAPI.Contracts
+﻿namespace DemoAPI.Contracts;
+
+public interface IRepositoryWrapper
 {
-    public interface IRepositoryWrapper
-    {
-        IBranchRepo Branch { get; }
-        IElectiveRepo Elective { get; }
-        IStudentRepo Student { get; }
-        void Save();
-    }
+    IBranchRepo Branch { get; }
+    IElectiveRepo Elective { get; }
+    IStudentRepo Student { get; }
+    void Save();
 }

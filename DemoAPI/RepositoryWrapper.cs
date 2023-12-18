@@ -2,55 +2,44 @@
 using DemoAPI.Contracts;
 using DemoAPI.Repository;
 
-namespace DemoAPI
+namespace DemoAPI; 
+public class RepositoryWrapper : IRepositoryWrapper
 {
-    public class RepositoryWrapper : IRepositoryWrapper
+    private readonly DataContext _context;
+    private IBranchRepo? _branch;
+    private IElectiveRepo? _elective;
+    private IStudentRepo? _student;
+    public RepositoryWrapper(DataContext context)
     {
-        private DataContext _context;
-        private IBranchRepo? _branch;
-        private IElectiveRepo? _elective;
-        private IStudentRepo? _student;
-        public RepositoryWrapper(DataContext context)
-        {
-            _context = context;
-        }
+        _context = context;
+    }
 
-        public IElectiveRepo Elective
+    public IElectiveRepo Elective
+    {
+        get
         {
-            get
-            {
-                if (_elective == null)
-                {
-                    _elective = new ElectiveRepository(_context);
-                }
-                return _elective;
-            }
+            _elective ??= new ElectiveRepository(_context);
+            return _elective;
         }
-        public IStudentRepo Student
+    }
+    public IStudentRepo Student
+    {
+        get
         {
-            get
-            {
-                if (_student == null)
-                {
-                    _student = new StudentRepository(_context);
-                }
-                return _student;
-            }
+            _student ??= new StudentRepository(_context);
+            return _student;
         }
-        public IBranchRepo Branch
+    }
+    public IBranchRepo Branch
+    {
+        get
         {
-            get
-            {
-                if (_branch == null)
-                {
-                    _branch = new BranchRepository(_context);
-                }
-                return _branch;
-            }
+            _branch ??= new BranchRepository(_context);
+            return _branch;
         }
-        public void Save()
-        {
-            _context.SaveChanges();
-        }
+    }
+    public void Save()
+    {
+        _context.SaveChanges();
     }
 }

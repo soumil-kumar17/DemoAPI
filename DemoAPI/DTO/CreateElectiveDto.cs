@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DemoAPI.DTO
+namespace DemoAPI.DTO;
+
+public class CreateElectiveDto
 {
-    public class CreateElectiveDto
-    {
-        [Required]
-        public int ElectiveId { get; set; }
-        [Required]
-        public string ElectiveName { get; set; }
-    }
+    [Required]
+    public int ElectiveId { get; set; }
+    [Required]
+    public string? ElectiveName { get; set; }
 }
